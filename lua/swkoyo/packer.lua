@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use('navarasu/onedark.nvim')
+    use { "shaunsingh/nord.nvim" }
 
     use {
         "folke/trouble.nvim",
@@ -34,6 +34,10 @@ return require('packer').startup(function(use)
         end
     }
 
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('ThePrimeagen/harpoon')
