@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use { "shaunsingh/nord.nvim" }
+    use { 'navarasu/onedark.nvim' }
 
     use {
         "folke/trouble.nvim",
@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
             }
         end
     }
+
+    use { 'norcalli/nvim-colorizer.lua' }
 
     use {
         'numToStr/Comment.nvim',

@@ -1,1 +1,7 @@
-vim.cmd[[colorscheme nord]]
+require('onedark').setup {
+    style = 'darker',
+    transparent = true
+}
+
+require('onedark').load()
+
