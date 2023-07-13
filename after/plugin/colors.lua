@@ -1,7 +1,9 @@
-require('onedark').setup {
-    style = 'darker',
-    transparent = true
-}
+require("onedark").setup({
+	style = "darker",
+	transparent = true,
+	code_style = {
+		comments = "none",
+	},
+})
 
-require('onedark').load()
-
+require("onedark").load()
