@@ -3,7 +3,7 @@ require("mason-null-ls").setup({
 		"eslint_d",
 		"prettierd",
 		"stylua",
-		"black",
+        "yapf",
 		"isort",
 		"goimports",
 		"shfmt",
