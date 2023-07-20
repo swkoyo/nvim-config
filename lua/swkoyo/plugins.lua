@@ -23,6 +23,7 @@ local plugins = {
 	"mbbill/undotree",
 	"tpope/vim-fugitive",
 	"github/copilot.vim",
+	"nmac427/guess-indent.nvim",
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",

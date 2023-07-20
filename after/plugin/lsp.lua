@@ -2,6 +2,8 @@ local lsp = require("lsp-zero").preset({})
 
 lsp.on_attach(function(client, bufnr)
 	lsp.default_keymaps({ buffer = bufnr, preserve_mappings = false })
+	vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = true })
+	vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { buffer = true })
 end)
 
 lsp.format_mapping("<leader>f", {
@@ -11,7 +13,8 @@ lsp.format_mapping("<leader>f", {
 	},
 	servers = {
 		["rust_analyzer"] = { "rust" },
-		["null-ls"] = { "lua", "python", "typescript", "javascript", "go", "sh" },
+		["dockerls"] = { "dockerfile" },
+		["null-ls"] = { "lua", "python", "typescript", "typescriptreact", "javascript", "go", "sh" },
 	},
 })
 
@@ -49,7 +52,8 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"pyright",
 		"gopls",
-        "bashls",
+		"bashls",
+		"dockerls",
 	},
 	handlers = {
 		lsp.default_setup,
