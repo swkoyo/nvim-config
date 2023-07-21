@@ -7,6 +7,7 @@ require("mason-null-ls").setup({
 		"isort",
 		"goimports",
 		"shfmt",
+		"fixjson",
 	},
 	handlers = {},
 })
