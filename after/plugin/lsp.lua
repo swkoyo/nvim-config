@@ -50,7 +50,7 @@ require("mason-lspconfig").setup({
 		"tsserver",
 		"rust_analyzer",
 		"lua_ls",
-		"pyright",
+		"pylsp",
 		"gopls",
 		"bashls",
 		"dockerls",

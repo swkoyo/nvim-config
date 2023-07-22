@@ -24,6 +24,7 @@ local plugins = {
 	"tpope/vim-fugitive",
 	"github/copilot.vim",
 	"nmac427/guess-indent.nvim",
+	"ellisonleao/glow.nvim",
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
