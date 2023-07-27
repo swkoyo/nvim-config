@@ -25,6 +25,10 @@ local plugins = {
 	"github/copilot.vim",
 	"nmac427/guess-indent.nvim",
 	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 	},
