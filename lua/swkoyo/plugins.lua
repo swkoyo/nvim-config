@@ -24,6 +24,7 @@ local plugins = {
 	"tpope/vim-fugitive",
 	"github/copilot.vim",
 	"nmac427/guess-indent.nvim",
+	"sindrets/diffview.nvim",
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
