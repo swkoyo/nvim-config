@@ -14,7 +14,7 @@ lsp.format_mapping("<leader>f", {
 	servers = {
 		["rust_analyzer"] = { "rust" },
 		["dockerls"] = { "dockerfile" },
-		["null-ls"] = { "lua", "python", "typescript", "typescriptreact", "javascript", "go", "sh", "json" },
+		["null-ls"] = { "lua", "python", "typescript", "typescriptreact", "javascript", "go", "sh", "json", "c", "cpp" },
 	},
 })
 
@@ -55,6 +55,7 @@ require("mason-lspconfig").setup({
 		"bashls",
 		"dockerls",
 		"jsonls",
+		"clangd",
 	},
 	handlers = {
 		lsp.default_setup,

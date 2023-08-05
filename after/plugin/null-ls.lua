@@ -8,6 +8,7 @@ require("mason-null-ls").setup({
 		"goimports",
 		"shfmt",
 		"fixjson",
+		"clang_format"
 	},
 	handlers = {},
 })
