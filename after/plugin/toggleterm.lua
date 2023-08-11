@@ -1,5 +1,5 @@
 require("toggleterm").setup({
-	direction = "float",
+	direction = "horizontal",
 })
 
 vim.keymap.set("n", "<leader>pt", ":ToggleTerm<CR>")

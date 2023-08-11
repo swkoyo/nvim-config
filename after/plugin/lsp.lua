@@ -68,6 +68,8 @@ require("mason-lspconfig").setup({
 		"dockerls",
 		"jsonls",
 		"clangd",
+		"dockerls",
+		"docker_compose_language_service",
 	},
 	handlers = {
 		lsp.default_setup,
