@@ -5,6 +5,7 @@ require("mason-null-ls").setup({
 		"stylua",
 		"black",
 		"ruff",
+		"ruff_lsp",
 		"goimports",
 		"shfmt",
 		"fixjson",
@@ -14,7 +15,13 @@ require("mason-null-ls").setup({
 	handlers = {},
 })
 
-require("null-ls").setup()
+local null_ls = require("null-ls")
+
+null_ls.setup({
+	sources = {
+		null_ls.builtins.diagnostics.ruff
+	}
+})
 
 --
 -- null_ls.setup({
