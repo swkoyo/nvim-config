@@ -3,6 +3,7 @@ local ignore_files = {
 	"NvimTree",
 	"Trouble",
 	"lazy",
+	"dashboard",
 	"mason",
 	"notify",
 	"toggleterm",
