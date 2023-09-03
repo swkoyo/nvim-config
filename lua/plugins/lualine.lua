@@ -3,7 +3,13 @@ return {
 	event = "VeryLazy",
 	opts = function()
 		local icons = require("config.utils").icons
-		-- local Util = require("lazyvim.util")
+
+		local fg = function(name)
+			local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
+				or vim.api.nvim_get_hl_by_name(name, true)
+			local fg = hl and hl.fg or hl.foreground
+			return fg and { fg = string.format("#%06x", fg) }
+		end
 
 		return {
 			options = {
@@ -31,34 +37,26 @@ return {
 						color_correction = "static",
 						padding = { left = 1, right = 0 },
 					},
-					-- {
-					-- 	function()
-					-- 		return require("nvim-navic").get_location()
-					-- 	end,
-					-- 	cond = function()
-					-- 		return require("nvim-navic").is_available()
-					-- 	end,
-					-- },
 				},
 				lualine_x = {
-					-- {
-					-- 	function()
-					-- 		return require("noice").api.status.command.get()
-					-- 	end,
-					-- 	cond = function()
-					-- 		return package.loaded["noice"] and require("noice").api.status.command.has()
-					-- 	end,
-					-- 	color = Util.fg("Statement"),
-					-- },
-					-- {
-					-- 	function()
-					-- 		return require("noice").api.status.mode.get()
-					-- 	end,
-					-- 	cond = function()
-					-- 		return package.loaded["noice"] and require("noice").api.status.mode.has()
-					-- 	end,
-					-- 	color = Util.fg("Constant"),
-					-- },
+					{
+						function()
+							return require("noice").api.status.command.get()
+						end,
+						cond = function()
+							return package.loaded["noice"] and require("noice").api.status.command.has()
+						end,
+						color = fg("Statement"),
+					},
+					{
+						function()
+							return require("noice").api.status.mode.get()
+						end,
+						cond = function()
+							return package.loaded["noice"] and require("noice").api.status.mode.has()
+						end,
+						color = fg("Constant"),
+					},
 					-- {
 					-- 	function()
 					-- 		return "  " .. require("dap").status()
@@ -68,11 +66,11 @@ return {
 					-- 	end,
 					-- 	color = Util.fg("Debug"),
 					-- },
-					-- {
-					-- 	require("lazy.status").updates,
-					-- 	cond = require("lazy.status").has_updates,
-					-- 	color = Util.fg("Special"),
-					-- },
+					{
+						require("lazy.status").updates,
+						cond = require("lazy.status").has_updates,
+						color = fg("Special"),
+					},
 					{
 						"diff",
 						symbols = {

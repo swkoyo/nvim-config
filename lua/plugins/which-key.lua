@@ -26,5 +26,6 @@ return {
 		local wk = require("which-key")
 		wk.setup(opts)
 		wk.register(opts.defaults)
+        opts.defaults["<leader>sn"] = { name = "+noice" }
 	end,
 }

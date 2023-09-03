@@ -22,8 +22,8 @@ return {
 					["<C-e>"] = cmp.mapping.abort(),
 					["<C-p>"] = cmp.mapping.select_prev_item(cmp_action),
 					["<C-n>"] = cmp.mapping.select_next_item(cmp_action),
-					["<C-f>"] = cmp_action.luasnip_jump_forward(),
-					["<C-b>"] = cmp_action.luasnip_jump_backward(),
+					-- ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+					-- ["<C-b>"] = cmp_action.luasnip_jump_backward(),
 				},
 			})
 		end,
@@ -111,9 +111,6 @@ return {
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
 		event = { "BufReadPre", "BufNewFile" },
 		opts = function()
 			local nls = require("null-ls")
