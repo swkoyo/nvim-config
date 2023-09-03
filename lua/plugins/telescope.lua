@@ -1,3 +1,5 @@
+local Util = require("util")
+
 return {
 
 	{
@@ -5,30 +7,16 @@ return {
 		cmd = "Telescope",
 		version = false,
 		keys = {
+			{ "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+			{ "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
 			-- find
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{
-				"<leader>ff",
-				function()
-					require("telescope.builtin").find_files()
-				end,
-				desc = "Find Files (root dir)",
-			},
-			{
-				"<leader>fF",
-				function()
-					require("telescope.builtin").find_files({ cwd = false })
-				end,
-				desc = "Find Files (cwd)",
-			},
+			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-			{
-				"<leader>fR",
-				function()
-					require("telescope.builtin").oldfiles({ cwd = vim.loop.cwd() })
-				end,
-				desc = "Recent (cwd)",
-			},
+			{ "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
 			-- git
 			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
 			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
@@ -40,20 +28,8 @@ return {
 			{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
 			{ "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
 			{ "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-			{
-				"<leader>sg",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				desc = "Grep (root dir)",
-			},
-			{
-				"<leader>sG",
-				function()
-					require("telescope.builtin").live_grep({ cwd = false })
-				end,
-				desc = "Grep (cwd)",
-			},
+			{ "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
 			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
 			{ "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
 			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -61,61 +37,19 @@ return {
 			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
 			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
 			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-			{
-				"<leader>su",
-				function()
-					require("telescope.builtin").grep_string({ word_match = "-w" })
-				end,
-				desc = "Word under cursor (root dir)",
-			},
-			{
-				"<leader>sU",
-				function()
-					require("telescope.builtin").grep_string({ cwd = false, word_match = "-w" })
-				end,
-				desc = "Word under cursor (cwd)",
-			},
-			{
-				"<leader>sw",
-				function()
-					require("telescope.builtin").live_grep({ word_match = "-w" })
-				end,
-				desc = "Word (root dir)",
-			},
-			{
-				"<leader>sW",
-				function()
-					require("telescope.builtin").live_grep({ cwd = false, word_match = "-w" })
-				end,
-				desc = "Word (cwd)",
-			},
-			{
-				"<leader>sw",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				mode = "v",
-				desc = "Selection (root dir)",
-			},
-			{
-				"<leader>sW",
-				function()
-					require("telescope.builtin").live_grep({ cwd = false })
-				end,
-				mode = "v",
-				desc = "Selection (cwd)",
-			},
+			{ "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
+			{ "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
+			{ "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
+			{ "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
 			{
 				"<leader>uC",
-				function()
-					require("telescope.builtin").colorscheme({ enable_preview = true })
-				end,
+				Util.telescope("colorscheme", { enable_preview = true }),
 				desc = "Colorscheme with preview",
 			},
 			{
 				"<leader>ss",
 				function()
-					require("telescope.builtin").lsp_document_symbols({
+					Util.telescope.lsp_document_symbols({
 						symbols = {
 							"Class",
 							"Function",
@@ -135,7 +69,7 @@ return {
 			{
 				"<leader>sS",
 				function()
-					require("telescope.builtin").lsp_dynamic_workspace_symbols({
+					Util.telescope.lsp_dynamic_workspace_symbols({
 						symbols = {
 							"Class",
 							"Function",
@@ -168,12 +102,12 @@ return {
 						["<a-i>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							require("telescope.actions").find_files({ no_ignore = true, default_text = line })()
+							Util.telescope("find_files", { no_ignore = true, default_text = line })()
 						end,
 						["<a-h>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							require("telescope.actions").find_files({ hidden = true, default_text = line })()
+							Util.telescope("find_files", { hidden = true, default_text = line })()
 						end,
 						["<C-Down>"] = function(...)
 							return require("telescope.actions").cycle_history_next(...)
