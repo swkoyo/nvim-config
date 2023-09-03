@@ -3,13 +3,7 @@ return {
 	event = "VeryLazy",
 	opts = function()
 		local icons = require("config.utils").icons
-
-		local fg = function(name)
-			local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
-				or vim.api.nvim_get_hl_by_name(name, true)
-			local fg = hl and hl.fg or hl.foreground
-			return fg and { fg = string.format("#%06x", fg) }
-		end
+        local Util = require("util")
 
 		return {
 			options = {
@@ -46,7 +40,7 @@ return {
 						cond = function()
 							return package.loaded["noice"] and require("noice").api.status.command.has()
 						end,
-						color = fg("Statement"),
+						color = Util.fg("Statement"),
 					},
 					{
 						function()
@@ -55,7 +49,7 @@ return {
 						cond = function()
 							return package.loaded["noice"] and require("noice").api.status.mode.has()
 						end,
-						color = fg("Constant"),
+						Util.color = fg("Constant"),
 					},
 					-- {
 					-- 	function()
@@ -69,7 +63,7 @@ return {
 					{
 						require("lazy.status").updates,
 						cond = require("lazy.status").has_updates,
-						color = fg("Special"),
+						Util.color = fg("Special"),
 					},
 					{
 						"diff",

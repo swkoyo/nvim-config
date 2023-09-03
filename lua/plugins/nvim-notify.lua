@@ -20,9 +20,12 @@ return {
 			return math.floor(vim.o.columns * 0.75)
 		end,
 	},
-	config = function(_, opts)
-		require("notify").setup(opts)
-
-		vim.notify = require("notify")
+	init = function()
+		local Util = require("util")
+		if not Util.has("noice.nvim") then
+			Util.on_very_lazy(function()
+				vim.notify = require("notify")
+			end)
+		end
 	end,
 }
