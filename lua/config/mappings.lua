@@ -5,7 +5,7 @@ vim.keymap.set("n", "<leader>y", [["+Y]], { desc = "Copy line to global clipboar
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d"]], { desc = "Delete line without copying" })
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>", { desc = "TMUX Sessionizer" })
+vim.keymap.set("n", "<leader>ft", "<cmd>silent !tmux neww tmux-sessionizer<cr>", { desc = "TMUX Sessionizer" })
 
 vim.keymap.set("n", "<leader>bx", "<cmd>!chmod +x %<cr>", { silent = true, desc = "Make current buffer executable" })
 
