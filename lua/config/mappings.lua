@@ -17,6 +17,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Keep cursor at center during p
 vim.keymap.set("n", "n", "nzzzv", { desc = "Keep cursor at center during search next" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Keep cursor at center during search prev" })
 
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
 vim.keymap.set(
 	"n",
 	"<leader>cr",

@@ -1,17 +1,17 @@
 return {
-	{
-		"navarasu/onedark.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			style = "darker",
-			transparent = true,
-		},
-		config = function(_, opts)
-			require("onedark").setup(opts)
-			require("onedark").load()
-		end,
-	},
+	-- {
+	-- 	"navarasu/onedark.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {
+	-- 		style = "darker",
+	-- 		transparent = true,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("onedark").setup(opts)
+	-- 		require("onedark").load()
+	-- 	end,
+	-- },
 	-- {
 	-- 	"ellisonleao/gruvbox.nvim",
 	-- 	lazy = false,
@@ -24,20 +24,21 @@ return {
 	-- 		vim.cmd("colorscheme gruvbox")
 	-- 	end,
 	-- },
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {
-	-- 		transparent = true,
-	-- 		styles = {
-	-- 			sidebars = "transparent",
-	-- 			floats = "transparent",
-	-- 		},
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("tokyonight").setup(opts)
-	-- 		vim.cmd([[colorscheme tokyonight]])
-	-- 	end,
-	-- },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+            style = "night",
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd([[colorscheme tokyonight]])
+		end,
+	},
 }

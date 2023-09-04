@@ -25,7 +25,6 @@ o.signcolumn = "yes"
 o.isfname:append("@-@")
 
 o.updatetime = 50
-o.colorcolumn = "80"
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

@@ -49,7 +49,7 @@ return {
 						cond = function()
 							return package.loaded["noice"] and require("noice").api.status.mode.has()
 						end,
-						Util.color = fg("Constant"),
+						color = Util.fg("Constant"),
 					},
 					-- {
 					-- 	function()
@@ -63,7 +63,7 @@ return {
 					{
 						require("lazy.status").updates,
 						cond = require("lazy.status").has_updates,
-						Util.color = fg("Special"),
+						color = Util.fg("Special"),
 					},
 					{
 						"diff",
