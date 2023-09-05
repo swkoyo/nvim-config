@@ -8,6 +8,11 @@ return {
 				["vim.lsp.util.stylize_markdown"] = true,
 				["cmp.entry.get_documentation"] = true,
 			},
+            documentation = {
+                opts = {
+                    border = "rounded"
+                }
+            }
 		},
 		routes = {
 			{

@@ -21,7 +21,10 @@ return {
                     source = "if_many",
                     prefix = "●",
                 },
-                severity_sort = true
+                severity_sort = true,
+                float = {
+                    border = "rounded"
+                },
             },
             inlay_hints = {
                 enabled = false
@@ -218,6 +221,9 @@ return {
             ensure_installed = {
                 "stylua",
                 "shfmt",
+            },
+            ui = {
+                border = "rounded"
             }
         },
         ---@param opts MasonSettings | {ensure_installed: string[]}
