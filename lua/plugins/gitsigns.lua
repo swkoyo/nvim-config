@@ -27,6 +27,7 @@ return {
             map("n", "<leader>ghR", gs.reset_buffer, "Reset Hunk (GitSigns)")
             map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk (GitSigns)")
             map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line (GitSigns)")
+            map("n", "<leader>ghB", function() gs.toggle_current_line_blame() end, "Toggle Current Line Blame (GitSigns)")
             map("n", "<leader>ghd", gs.diffthis, "Diff This (GitSigns)")
             map("n", "<leader>ghx", "<cmd>wincmd p | q<cr>", "Exit Diff (Gitsigns)")
             map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~ (GitSigns)")

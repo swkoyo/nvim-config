@@ -24,9 +24,9 @@ return {
 			"lua",
 			"markdown",
 			"regex",
-            "python",
-            "typescript",
-            "javascript",
+			"python",
+			"typescript",
+			"javascript",
 		},
 		incremental_selection = {
 			enable = true,
@@ -39,16 +39,16 @@ return {
 		},
 	},
 	config = function(_, opts)
-	    if type(opts.ensure_installed) == "table" then
-	        local added = {}
-	        opts.ensure_installed = vim.tbl_filter(function(lang)
-	            if added[lang] then
-	                return false
-	            end
-	            return true
-	        end, opts.ensure_installed)
-	    end
+		if type(opts.ensure_installed) == "table" then
+			local added = {}
+			opts.ensure_installed = vim.tbl_filter(function(lang)
+				if added[lang] then
+					return false
+				end
+				return true
+			end, opts.ensure_installed)
+		end
 
-	    require("nvim-treesitter.configs").setup(opts)
-	end
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 }
