@@ -199,6 +199,7 @@ return {
 
 					-- Python
 					nls.builtins.formatting.black,
+                    nls.builtins.formatting.isort,
 					nls.builtins.diagnostics.ruff,
 
 					-- Golang
