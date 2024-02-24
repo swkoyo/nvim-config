@@ -3,7 +3,7 @@ return {
 	branch = "harpoon2",
 	keys = {
 		{
-			"<leader>fh",
+			"<leader>hm",
 			function()
 				local harpoon = require("harpoon")
 
