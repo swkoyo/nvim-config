@@ -6,6 +6,9 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		version = false,
+		dependencies = {
+			"debugloop/telescope-undo.nvim",
+		},
 		keys = {
 			{ "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
 			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
@@ -86,6 +89,7 @@ return {
 				end,
 				desc = "Goto Symbol (Workspace)",
 			},
+			{ "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undo" },
 		},
 		opts = {
 			defaults = {
@@ -129,7 +133,20 @@ return {
 					},
 				},
 			},
+			extensions = {
+				undo = {},
+			},
 		},
+		config = function(_, opts)
+			opts.defaults.mappings = {
+				i = {
+					["<c-y>"] = require("telescope-undo.actions").yank_deletions,
+					["<c-r>"] = require("telescope-undo.actions").restore,
+				},
+			}
+			require("telescope").setup(opts)
+			require("telescope").load_extension("undo")
+		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -157,13 +174,4 @@ return {
 			})
 		end,
 	},
-	{
-		"debugloop/telescope-undo.nvim",
-		keys = {
-			{ "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undo" },
-		},
-		config = function(_, opts)
-			require("telescope").load_extension("undo")
-		end
-	}
 }
