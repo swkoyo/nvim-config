@@ -12,13 +12,19 @@ local ignore_files = {
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
-			-- char = "▏",
-			char = "│",
-			filetype_exclude = ignore_files,
-			show_trailing_blankline_indent = false,
-			show_current_context = false,
+            indent = {
+                char = "|",
+				tab_char = "|",
+            },
+            exclude = {
+                filetypes = ignore_files
+            },
+			scope = {
+				enabled = false
+			}
 		},
 	},
 	{
