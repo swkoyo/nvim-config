@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	opts = function()
 		local icons = require("config.utils").icons
-        local Util = require("util")
+		local Util = require("util")
 
 		return {
 			options = {
@@ -72,6 +72,31 @@ return {
 							modified = icons.git.modified,
 							removed = icons.git.removed,
 						},
+					},
+					{
+						function()
+							local icon = require("configs.util").icons.kinds.Copilot
+							local status = require("copilot.api").status.data
+							return icon .. (status.message or "")
+						end,
+						cond = function()
+							local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+							return ok and #clients > 0
+						end,
+						color = function()
+							local Util = require("util")
+							local colors = {
+								[""] = Util.fg("Special"),
+								["Normal"] = Util.fg("Special"),
+								["Warning"] = Util.fg("DiagnosticError"),
+								["InProgress"] = Util.fg("DiagnosticWarn"),
+							}
+							if not package.loaded["copilot"] then
+								return
+							end
+							local status = require("copilot.api").status.data
+							return colors[status.status] or colors[""]
+						end,
 					},
 				},
 				lualine_y = {
