@@ -52,13 +52,13 @@ return {
 					},
 				},
 				pyright = {
-					-- settings = {
-					-- 	python = {
-					-- 		analysis = {
-					-- 			typeCheckingMode = "off",
-					-- 		},
-					-- 	},
-					-- },
+					settings = {
+						python = {
+							analysis = {
+								typeCheckingMode = "off",
+							},
+						},
+					},
 				},
 			},
 			setup = {},
