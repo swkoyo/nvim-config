@@ -38,6 +38,7 @@ return {
 			},
 			servers = {
 				jsonls = {},
+				rust_analyzer = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -51,13 +52,13 @@ return {
 					},
 				},
 				pyright = {
-					settings = {
-						python = {
-							analysis = {
-								typeCheckingMode = "off",
-							},
-						},
-					},
+					-- settings = {
+					-- 	python = {
+					-- 		analysis = {
+					-- 			typeCheckingMode = "off",
+					-- 		},
+					-- 	},
+					-- },
 				},
 			},
 			setup = {},
@@ -114,8 +115,8 @@ return {
 							end
 						end
 					end
-			end
 
+			end
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 			local servers = opts.servers
@@ -207,6 +208,9 @@ return {
 
 					-- Bash
 					nls.builtins.formatting.shfmt,
+
+					-- Rust
+					nls.builtins.formatting.rustfmt,
 
 					-- JSON
 					nls.builtins.formatting.fixjson,
