@@ -39,6 +39,9 @@ return {
 			servers = {
 				jsonls = {},
 				rust_analyzer = {},
+				clangd = {
+					cmd = { "clangd", "--offset-encoding=utf-16" },
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -115,7 +118,6 @@ return {
 							end
 						end
 					end
-
 			end
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
