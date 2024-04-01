@@ -6,9 +6,93 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		{ "j-hui/fidget.nvim", opts = {} },
+		-- { "j-hui/fidget.nvim", opts = {} },
 	},
-	config = function()
+	opts = {
+		diagnostics = {
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+			virtual_text = {
+				spacing = 4,
+				source = "if_many",
+				prefix = "●",
+			},
+			float = {
+				border = "rounded",
+			},
+		},
+		servers = {
+			lua_ls = {
+				settings = {
+					Lua = {
+						completion = {
+							callSnippet = "Replace",
+						},
+					},
+				},
+			},
+			rust_analyzer = {},
+			gopls = {},
+			tsserver = {
+				on_attach = function(_, bufnr)
+					vim.keymap.set("n", "<leader>co", function()
+						vim.lsp.buf.code_action({
+							apply = true,
+							context = {
+								only = { "source.organizeImports.ts" },
+								diagnostics = {},
+							},
+						})
+					end, { buffer = bufnr, desc = "LSP: [C]ode [O]rganize Imports (TS)" })
+					vim.keymap.set("n", "<leader>cr", function()
+						vim.lsp.buf.code_action({
+							apply = true,
+							context = {
+								only = { "source.removeUnused.ts" },
+								diagnostics = {},
+							},
+						})
+					end, { buffer = bufnr, desc = "LSP: [C]ode [R]emove Unused Imports (TS)" })
+				end,
+				settings = {
+					completions = {
+						completeFunctionCalls = true,
+					},
+				},
+			},
+			pyright = {
+				disableOrganizeImports = true,
+				settings = {
+					python = {
+						analysis = {
+							ignore = { "*" },
+						},
+					},
+				},
+			},
+			ruff_lsp = {
+				on_attach = function(client, bufnr)
+					client.server_capabilities.hoverProvider = false
+					vim.keymap.set("n", "<leader>co", function()
+						vim.lsp.buf.code_action({
+							apply = true,
+							context = {
+								only = { "source.organizeImports" },
+								diagnostics = {},
+							},
+						})
+					end, { buffer = bufnr, desc = "LSP: [C]ode [O]rganize Imports (Ruff)" })
+				end,
+				init_options = {
+					settings = {
+						args = {},
+					},
+				},
+			},
+		},
+	},
+	config = function(_, opts)
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			callback = function(event)
@@ -61,44 +145,17 @@ return {
 			end,
 		})
 
+		require("lspconfig.ui.windows").default_options.border = "rounded"
+
 		for name, icon in pairs(require("core.constants").icons.diagnostics) do
 			name = "DiagnosticSign" .. name
 			vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 		end
 
-		local diagnostics = {
-			underline = true,
-			update_in_insert = false,
-			severity_sort = true,
-			virtual_text = {
-				spacing = 4,
-				source = "if_many",
-				prefix = "●",
-			},
-			float = {
-				border = "rounded",
-			},
-		}
-
-		vim.diagnostic.config(vim.deepcopy(diagnostics))
+		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities({}))
-
-		local servers = {
-			lua_ls = {
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = "Replace",
-						},
-					},
-				},
-			},
-			rust_analyzer = {},
-			gopls = {},
-			tsserver = {},
-		}
 
 		require("mason").setup({
 			ui = {
@@ -111,10 +168,14 @@ return {
 		vim.lsp.handlers["textDocument/signatureHelp"] =
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-		local ensure_installed = vim.tbl_keys(servers or {})
+		local ensure_installed = vim.tbl_keys(opts.servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua",
 			"rust_analyzer",
+			"tsserver",
+			"pyright",
+			"ruff_lsp",
+			"gopls",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -122,7 +183,7 @@ return {
 		require("mason-lspconfig").setup({
 			handlers = {
 				function(server_name)
-					local server = servers[server_name] or {}
+					local server = opts.servers[server_name] or {}
 					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					require("lspconfig")[server_name].setup(server)
 				end,
