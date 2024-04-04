@@ -92,6 +92,12 @@ return {
 			},
 			dockerls = {},
 			docker_compose_language_service = {},
+			clangd = {
+				capabilities = {
+					offsetEncoding = { "utf-16" },
+				},
+			},
+			bashls = {},
 		},
 	},
 	config = function(_, opts)
@@ -178,6 +184,8 @@ return {
 			"pyright",
 			"ruff_lsp",
 			"gopls",
+			"clangd",
+			"bashls",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

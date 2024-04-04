@@ -1,7 +1,13 @@
 return {
 	"stevearc/conform.nvim",
 	opts = {
-		notify_on_error = false,
+		format = {
+			timeout_ms = 3000,
+			async = false,
+			quiet = false,
+			lsp_fallback = true,
+		},
+		notify_on_error = true,
 		format_on_save = function(bufnr)
 			local disable_filetypes = { c = true, cpp = true, python = true }
 			return {
@@ -17,6 +23,10 @@ return {
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
 			python = { "ruff_format" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			sh = { "shfmt" },
+			bash = { "shfmt" },
 		},
 	},
 	keys = {
