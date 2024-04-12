@@ -61,6 +61,11 @@ return {
 					},
 				},
 			},
+			eslint = {
+				on_attach = function(client, _)
+					client.server_capabilities.hoverProvider = false
+				end,
+			},
 			pyright = {
 				disableOrganizeImports = true,
 				settings = {
@@ -97,7 +102,29 @@ return {
 					offsetEncoding = { "utf-16" },
 				},
 			},
+			astro = {
+				init_options = {
+					typescript = {
+						tsdk = "node_modules/typescript/lib",
+					},
+				},
+			},
 			bashls = {},
+			omnisharp = {
+				handlers = {
+					["textDocument/definition"] = function(...)
+						return require("omnisharp_extended").handler(...)
+					end,
+				},
+				on_attach = function(_, bufnr)
+					vim.keymap.set("n", "gd", function()
+						require("omnisharp_extended").telescope_lsp_definitions()
+					end, { buffer = bufnr, desc = "[G]oto [D]efinition" })
+				end,
+				enable_roslyn_analyzers = true,
+				organize_imports_on_format = true,
+				enable_import_completion = true,
+			},
 		},
 	},
 	config = function(_, opts)

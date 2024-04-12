@@ -3,7 +3,7 @@ return {
 	opts = {
 		format = {
 			timeout_ms = 3000,
-			async = false,
+			async = true,
 			quiet = false,
 			lsp_fallback = true,
 		},
@@ -22,11 +22,19 @@ return {
 			javascriptreact = { "prettierd" },
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
+			astro = { "prettierd" },
 			python = { "ruff_format" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			sh = { "shfmt" },
 			bash = { "shfmt" },
+			cs = { "csharpier" },
+		},
+		formatters = {
+			csharpier = {
+				command = "dotnet-csharpier",
+				args = { "--write-stdout" },
+			},
 		},
 	},
 	keys = {

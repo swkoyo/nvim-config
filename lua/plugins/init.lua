@@ -7,4 +7,5 @@ return {
 	{ import = "plugins.util" },
 	{ import = "plugins.coding" },
 	{ import = "plugins.linter" },
+	{ import = "plugins.lang" },
 }
