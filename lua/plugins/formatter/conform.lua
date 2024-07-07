@@ -29,6 +29,9 @@ return {
 			sh = { "shfmt" },
 			bash = { "shfmt" },
 			cs = { "csharpier" },
+			ruby = { "rubocop" },
+			go = { "gofmt", "goimports" },
+			templ = { "templ" }
 		},
 		formatters = {
 			csharpier = {

@@ -66,15 +66,16 @@ return {
 					client.server_capabilities.hoverProvider = false
 				end,
 			},
+			solargraph = {},
 			pyright = {
 				disableOrganizeImports = true,
-				settings = {
-					python = {
-						analysis = {
-							typeCheckingMode = "off",
-						},
-					},
-				},
+				-- settings = {
+				-- 	python = {
+				-- 		analysis = {
+				-- 			typeCheckingMode = "off",
+				-- 		},
+				-- 	},
+				-- },
 			},
 			ruff_lsp = {
 				on_attach = function(client, bufnr)
@@ -228,6 +229,14 @@ return {
 					require("lspconfig")[server_name].setup(server)
 				end,
 			},
+		})
+
+		-- Cuda
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "cuda",
+			callback = function()
+				vim.bo.commentstring = "// %s"
+			end,
 		})
 	end,
 }

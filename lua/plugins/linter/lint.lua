@@ -4,6 +4,7 @@ return {
 	config = function()
 		local lint = require("lint")
 		lint.linters_by_ft = {
+			-- ruby = { "rubocop" },
 			-- javascript = { "eslint_d" },
 			-- javascriptreact = { "eslint_d" },
 			-- typescript = { "eslint_d" },
