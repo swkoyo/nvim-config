@@ -34,7 +34,7 @@ return {
 			},
 			rust_analyzer = {},
 			gopls = {},
-			tsserver = {
+			vtsls = {
 				on_attach = function(_, bufnr)
 					vim.keymap.set("n", "<leader>co", function()
 						vim.lsp.buf.code_action({
@@ -208,7 +208,7 @@ return {
 		vim.list_extend(ensure_installed, {
 			"stylua",
 			"rust_analyzer",
-			"tsserver",
+			"vtsls",
 			"pyright",
 			"ruff_lsp",
 			"gopls",
