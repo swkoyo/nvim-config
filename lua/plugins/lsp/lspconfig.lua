@@ -67,17 +67,18 @@ return {
 				end,
 			},
 			solargraph = {},
-			pyright = {
+			basedpyright = {
 				disableOrganizeImports = true,
-				-- settings = {
-				-- 	python = {
-				-- 		analysis = {
-				-- 			typeCheckingMode = "off",
-				-- 		},
-				-- 	},
-				-- },
+				settings = {
+					basedpyright = {
+						analysis = {
+							typeCheckingMode = "standard",
+							ignore = { "*" },
+						},
+					},
+				},
 			},
-			ruff_lsp = {
+			ruff = {
 				on_attach = function(client, bufnr)
 					client.server_capabilities.hoverProvider = false
 					vim.keymap.set("n", "<leader>co", function()
@@ -209,8 +210,9 @@ return {
 			"stylua",
 			"rust_analyzer",
 			"vtsls",
-			"pyright",
-			"ruff_lsp",
+			"basedpyright",
+			"eslint",
+			"ruff",
 			"gopls",
 			"clangd",
 			"bashls",
