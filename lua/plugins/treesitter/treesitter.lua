@@ -37,5 +37,14 @@ return {
 	},
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)
+		vim.filetype.add({
+			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+		})
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "hyprlang",
+			callback = function(event)
+				vim.bo[event.buf].commentstring = "# %s"
+			end,
+		})
 	end,
 }

@@ -31,7 +31,9 @@ return {
 			cs = { "csharpier" },
 			ruby = { "rubocop" },
 			go = { "gofmt", "goimports" },
-			templ = { "templ" }
+			templ = { "templ" },
+			json = { "fixjson" },
+			jsonc = { "fixjson" },
 		},
 		formatters = {
 			csharpier = {
