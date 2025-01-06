@@ -16,7 +16,7 @@ return {
 		vim.keymap.set(
 			"n",
 			"<leader>fe",
-			"<cmd>lua require('oil').open_float()<cr>",
+			"<cmd>lua require('oil').open()<cr>",
 			{ desc = "Open [F]ile [E]xplorer" }
 		)
 	end,
