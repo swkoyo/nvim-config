@@ -26,7 +26,7 @@ return {
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
 			astro = { "prettierd" },
-			python = { "ruff_format" },
+			python = { "ruff_format", "ruff_organize_imports" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			sh = { "shfmt" },
@@ -37,6 +37,7 @@ return {
 			templ = { "templ" },
 			json = { "fixjson" },
 			jsonc = { "fixjson" },
+			toml = { "taplo" },
 		},
 		formatters = {
 			csharpier = {

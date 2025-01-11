@@ -115,6 +115,7 @@ return {
 				},
 			},
 			bashls = {},
+			taplo = {},
 			omnisharp = {
 				handlers = {
 					["textDocument/definition"] = function(...)
