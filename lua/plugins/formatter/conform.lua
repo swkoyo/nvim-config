@@ -9,7 +9,7 @@ return {
 		},
 		notify_on_error = true,
 		format_on_save = function(bufnr)
-			local ignore_filetypes = { "python" }
+			local ignore_filetypes = { "python", "terraform", "yaml", "graphql" }
 			if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
 				return
 			end
@@ -25,8 +25,11 @@ return {
 			javascriptreact = { "prettierd" },
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
+			graphql = { "prettierd" },
 			astro = { "prettierd" },
-			python = { "ruff_format", "ruff_organize_imports" },
+			-- python = { "ruff_format", "ruff_organize_imports" },
+			python = { "ruff_format" },
+			-- python = { "black" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			sh = { "shfmt" },
@@ -38,6 +41,8 @@ return {
 			json = { "fixjson" },
 			jsonc = { "fixjson" },
 			toml = { "taplo" },
+			yaml = { "yamlfmt" },
+			terraform = { "terraform_fmt" },
 		},
 		formatters = {
 			csharpier = {
