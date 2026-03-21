@@ -32,12 +32,7 @@ return {
 			map("n", "<leader>ghB", function()
 				gs.toggle_current_line_blame()
 			end, "Toggle Current Line Blame")
-			map("n", "<leader>ghd", gs.diffthis, "Diff This")
-			map("n", "<leader>ghx", "<cmd>wincmd p | q<cr>", "Exit Diff")
-			map("n", "<leader>ghD", function()
-				gs.diffthis("~")
-			end, "Diff This ~")
-			map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
 		end,
 	},
 }

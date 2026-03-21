@@ -4,7 +4,7 @@ return {
     init = function()
         vim.g.navic_silence = true
 		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+			group = vim.api.nvim_create_augroup("lsp-attach-navic", { clear = true }),
 			callback = function(event)
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
                 if client.server_capabilities.documentSymbolProvider then

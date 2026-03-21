@@ -57,15 +57,10 @@ return {
 				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
-				{ name = "cmdline" },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
-			},
-			experimental = {
-				native_menu = false,
-				ghost_text = false,
 			},
 			formatting = {
 				expandable_indicator = true,

@@ -28,3 +28,5 @@ o.updatetime = 50
 
 o.ignorecase = true
 o.smartcase = true
+
+o.exrc = true
