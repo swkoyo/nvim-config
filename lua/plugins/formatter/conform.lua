@@ -9,7 +9,8 @@ return {
 		},
 		notify_on_error = true,
 		format_on_save = function(bufnr)
-			local ignore_filetypes = { "python", "terraform", "yaml", "graphql" }
+			local ignore_filetypes = { "terraform", "yaml", "graphql" }
+
 			if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
 				return
 			end
@@ -27,9 +28,13 @@ return {
 			typescriptreact = { "prettierd" },
 			graphql = { "prettierd" },
 			astro = { "prettierd" },
-			-- python = { "ruff_format", "ruff_organize_imports" },
-			python = { "ruff_format" },
-			-- python = { "black" },
+			python = function(bufnr)
+				local filepath = vim.api.nvim_buf_get_name(bufnr)
+				if filepath:find(vim.fn.expand("~/work"), 1, true) == 1 then
+					return { "isort", "black" }
+				end
+				return { "ruff_format" }
+			end,
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			sh = { "shfmt" },

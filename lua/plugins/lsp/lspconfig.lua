@@ -21,6 +21,14 @@ return {
 			float = {
 				border = "rounded",
 			},
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = " ",
+					[vim.diagnostic.severity.WARN] = " ",
+					[vim.diagnostic.severity.HINT] = " ",
+					[vim.diagnostic.severity.INFO] = " ",
+				},
+			},
 		},
 		servers = {
 			lua_ls = {
@@ -143,9 +151,9 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
 
-				map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-				map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+				map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
+				map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				map("K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
@@ -195,11 +203,6 @@ return {
 
 		require("lspconfig.ui.windows").default_options.border = "rounded"
 
-		for name, icon in pairs(require("core.constants").icons.diagnostics) do
-			name = "DiagnosticSign" .. name
-			vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-		end
-
 		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -234,14 +237,13 @@ return {
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+		for server_name, server in pairs(opts.servers) do
+			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+			vim.lsp.config(server_name, server)
+		end
+
 		require("mason-lspconfig").setup({
-			handlers = {
-				function(server_name)
-					local server = opts.servers[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-					require("lspconfig")[server_name].setup(server)
-				end,
-			},
+			automatic_enable = true,
 		})
 	end,
 }
